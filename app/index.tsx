@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { getToken } from '../utils/token';
+import { getToken } from '../services/token';
 
 export default function Index() {
   const router = useRouter();

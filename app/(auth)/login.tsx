@@ -1,17 +1,21 @@
 import { loginService } from '@/services/auth';
 import globalStyles from '@/styles/globalStyles';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const login = () => {
+  const router = useRouter();
     const insets = useSafeAreaInsets();
     const { width, height } = useWindowDimensions();
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
-    const attemptLogin = () => {
-        loginService(username,password);
+    const attemptLogin = async() => {
+        const loginSuccessful = await loginService(username,password);
+        if(loginSuccessful) {
+          router.push('/(app)/home');
+        }
     }
   return (
     <View
