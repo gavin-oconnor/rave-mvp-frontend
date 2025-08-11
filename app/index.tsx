@@ -10,10 +10,11 @@ export default function Index() {
     const checkLogin = async () => {
       const token = await getToken();
       if (token) {
-        console.log("TOKEN")
+        console.log('TOKEN');
+        console.log(`Token is ${token}`);
         router.replace('/(app)/home');
       } else {
-        console.log("NO TOKEN")
+        console.log('NO TOKEN');
         router.replace('/(auth)/login');
       }
     };
@@ -21,7 +22,9 @@ export default function Index() {
     checkLogin();
   }, []);
 
-  return <View style={{backgroundColor:"purple"}}>
-    <Text>Hello World</Text>
-  </View>; // or a loading spinner
+  return (
+    <View style={{ backgroundColor: 'purple' }}>
+      <Text>Hello World</Text>
+    </View>
+  ); // or a loading spinner
 }

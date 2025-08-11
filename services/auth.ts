@@ -6,12 +6,12 @@ export const loginService = async (username: string, password: string) => {
     const response = await axios.put(
       'http://127.0.0.1:5000/auth/login',
       {
-        email_or_username: username,
-        password
+        username: username,
+        password,
       },
       {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
@@ -19,7 +19,30 @@ export const loginService = async (username: string, password: string) => {
     console.log('Data:', response.data);
     await setToken(response.data.access_token);
     return true;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
 
+export const signUpService = async (username: string, password: string) => {
+  try {
+    const response = await axios.post(
+      'http://127.0.0.1:5000/auth/join',
+      {
+        username: username,
+        password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    console.log('Data:', response.data);
+    await setToken(response.data.access_token);
+    return true;
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
