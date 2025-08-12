@@ -1,14 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 
-const nearyou = () => {
+export default function NearYou() {
+  // wire your data here
+  const data = [{ id: '1' }, { id: '2' }];
   return (
-    <View>
-      <Text>nearyou</Text>
-    </View>
+    <FlatList
+      style={{ backgroundColor: 'rgb(10,10,10)' }}
+      data={data}
+      keyExtractor={(i) => i.id}
+      renderItem={() => null /* your feed row */}
+      refreshControl={
+        <RefreshControl
+          refreshing={false}
+          onRefresh={() => {}}
+          tintColor="white" // iOS
+          colors={['white']} // Android
+        />
+      }
+    />
   );
-};
-
-export default nearyou;
-
-const styles = StyleSheet.create({});
+}
